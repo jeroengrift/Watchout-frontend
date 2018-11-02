@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+    <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+
+<div class="container">
+        <h1>Edit {{movie.name}}</h1>
+        <form>
+          <div class="form-group">
+            <label for="name">name</label>
+            <input type="text" class="form-control" [(ngModel)] ="name">
+          </div>
+     
+          <div class="form-group">
+            <label for="youtube ID">url</label>
+            <input type="text" class="form-control" [(ngModel)] ="id">
+          </div>
+     
+          <button (click)="goBack()">go back</button>
+          <button (click)="save(name, id)">save</button>     
+        </form>
+    </div>
+

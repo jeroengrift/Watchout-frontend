@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+    <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+
+<h2>My Movies</h2>
+
+<ul class="movie">
+    <li *ngFor="let movie of movies">
+      <a routerLink="/detail/{{movie.id}}">
+        {{movie.name}}
+      </a>
+      <button class="delete" title="delete movie"
+        (click)="delete(movie)">x</button>
+    </li>
+  </ul>
+  

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+
+    <div *ngIf="movie">
+    <div class="row">
+        <div class="col-6 col-md-4">
+            <h2>{{movie.name | uppercase}}</h2>
+        </div>
+    </div>
+    </div>
+
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe
+  width="100%"
+  [src]="getUrl() | safe"
+  frameborder="0" 
+  allowfullscreen>
+</iframe>
+</div>
+

@@ -1,0 +1,67 @@
+/* Master Styles */
+h1 {
+  color: #B9090B !important;
+  font-family: Poppins !important;
+  font-size: 200% !important;
+  font-weight: bold !important;
+}
+h2, h3 {
+  color: #B9090B !important;
+  font-family: Helvetica !important;
+  font-weight: lighter !important;
+}
+body {
+  margin: 2em;
+  background-color: #000000
+}
+body, input[text], button {
+  color: #888;
+  font-family: Helvetica;
+}
+a {
+  cursor: pointer;
+  cursor: hand;
+}
+button {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
+}
+
+/* Navigation link styles */
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #000;
+  border-radius: 4px;
+}
+nav a:visited, a:link {
+  color: #B9090B;
+}
+nav a:hover {
+  color: #B9090B;
+  background-color: #CFD8DC;
+}
+nav a.active {
+  color: #B9090B;
+}
+
+/* everywhere else */
+* {
+  font-family: Helvetica;
+}

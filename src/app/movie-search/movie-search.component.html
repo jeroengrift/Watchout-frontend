@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+    <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+
+<div id="search-component">
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" placeholder=" Search">
+  <ul class="search-result">
+    <li *ngFor="let movie of movies$ | async" >
+      <a routerLink="/watch/{{movie.id}}">
+        {{movie.name}}
+      </a>
+    </li>
+  </ul>
+</div>
