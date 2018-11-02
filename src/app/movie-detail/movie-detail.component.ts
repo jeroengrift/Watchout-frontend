@@ -32,7 +32,7 @@ export class MovieDetailComponent implements OnInit {
     this.location.back();
   }
 
- save(): void {
+ save(name, id): void {
    this.movie.name = name;
    this.movie.youtubeId = id;
    console.log(this.movie.youtubeId);
