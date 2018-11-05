@@ -5,20 +5,30 @@
     </head>
 
 <div class="container">
-        <h1>Edit {{movie.name}}</h1>
+        <h1>Edit {{movie?.name}}</h1>
         <form>
+            <div class="form-group">
+                <label for="description">description</label>
+                <input type="text" class="form-control" [(ngModel)] ="description" [ngModelOptions]="{standalone: true}">
+              </div>
+
           <div class="form-group">
-            <label for="name">name</label>
-            <input type="text" class="form-control" [(ngModel)] ="name">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" [(ngModel)] ="name" [ngModelOptions]="{standalone: true}" placeholder="{{movie.name}}">
           </div>
-     
+
           <div class="form-group">
-            <label for="youtube ID">url</label>
-            <input type="text" class="form-control" [(ngModel)] ="id">
+            <label for="rating">Rating</label>
+            <input type="text" class="form-control" [(ngModel)] ="rating" [ngModelOptions]="{standalone: true}">
           </div>
-     
-          <button (click)="goBack()">go back</button>
-          <button (click)="save(name, id)">save</button>     
+
+          <div class="form-group">
+            <label for="youtubeId">Url</label>
+            <input type="text" class="form-control" [(ngModel)] ="youtubeId" [ngModelOptions]="{standalone: true}">
+          </div>
+
+          <button (click)="goBack()">Go back</button>
+          <button (click)="editMovie()">Save edits</button>     
         </form>
     </div>
 

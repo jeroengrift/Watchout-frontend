@@ -9,34 +9,39 @@ import { MovieService } from '../movie.service';
 })
 
 export class MoviesComponent implements OnInit {
-  movies: Movie[];
 
-  //every time a new component instance is made, a new movieservice is created
+  movies: Movie[];
+  private movie = new Movie;
+  private description: string;
+  private name: string;
+  private rating: number;
+  private youtubeId: string;
+
   constructor(private movieService: MovieService) { }
 
-  //every time a new component instance is made, the instance method getMovies is called. 
   ngOnInit() {
     this.getMovies();
   }
 
-  //getMovies calls the movieservice method getMovies (verwarrend). It is separated for flexibility.
     getMovies(): void {
-    this.movieService.getMovies() //this becuase it is created wihtin this instance.
-    .subscribe(movies => this.movies = movies); //subscribe? uizoeken
+    this.movieService.getMovies() 
+    .subscribe(movies => this.movies = movies); 
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.movieService.addMovie({ name } as Movie)
+  addMovie() {
+    this.movie.name = this.name;
+    this.movie.description = this.description;
+    this.movie.rating = this.rating;
+    this.movie.youtubeId = this.youtubeId;
+    this.movie.id
+    this.movieService.addMovie(this.movie)
       .subscribe(movie => {
         this.movies.push(movie);
       });
   }
 
-  delete(movie: Movie): void {
-    this.movies = this.movies.filter(h => h !== movie);
-    this.movieService.deleteMovie(movie).subscribe();
+  deleteMovie(id: number) {
+    alert("are you sure you want to delete this movie?")
+    this.movieService.deleteMovie(id);
   }
-
 }

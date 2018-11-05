@@ -12,6 +12,11 @@ import { MovieService }  from '../movie.service';
 export class MovieDetailComponent implements OnInit {
   @Input() movie: Movie;
 
+  private description: string;
+  private name: string;
+  private rating: number;
+  private youtubeId: string;
+
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
@@ -32,12 +37,11 @@ export class MovieDetailComponent implements OnInit {
     this.location.back();
   }
 
- save(name, id): void {
-   this.movie.name = name;
-   this.movie.youtubeId = id;
-   console.log(this.movie.youtubeId);
-   console.log(this.movie.name);
-
+ editMovie(): void {
+   this.movie.name = this.name;
+   this.movie.description = this.description;
+   this.movie.rating = this.rating;
+   this.movie.youtubeId = this.youtubeId;
     this.movieService.updateMovie(this.movie)
       .subscribe(() => this.goBack());
   }

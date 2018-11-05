@@ -1,18 +1,47 @@
 <!doctype html>
 <html lang="en">
-    <head>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    </head>
 
-<h2>My Movies</h2>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
 
-<ul class="movie">
-    <li *ngFor="let movie of movies">
-      <a routerLink="/detail/{{movie.id}}">
-        {{movie.name}}
-      </a>
-      <button class="delete" title="delete movie"
-        (click)="delete(movie)">x</button>
-    </li>
-  </ul>
-  
+<div class="row">
+  <div class="col-md-6">
+  <h2>My Movies</h2>
+    <ul class="movie">
+      <li *ngFor="let movie of movies">
+        <a routerLink="/detail/{{movie.id}}">
+          {{movie.name}}
+        </a>
+        <button class="delete" title="delete movie" (click)="deleteMovie(movie.id)">x</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-6">
+    <h2>Add Movie</h2>
+    <form>
+      <div class="form-group">
+        <label for="description">description</label>
+        <input type="text" class="form-control" [(ngModel)]="description" [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <input type="text" class="form-control" [(ngModel)]="rating" [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <div class="form-group">
+        <label for="youtubeId">Url</label>
+        <input type="text" class="form-control" [(ngModel)]="youtubeId" [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <button (click)="addMovie()">Save</button>
+    </form>
+  </div>
+</div>
