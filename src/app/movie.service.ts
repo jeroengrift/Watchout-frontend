@@ -46,7 +46,7 @@ export class MovieService {
     this.http.delete(this.moviesUrl + '/' + id).subscribe((data) => {});
   }
 
-  updateMovie (movie: Movie): Observable<any> {
+  EditMovie (movie: Movie): Observable<any> {
     const url = `${this.moviesUrl}/${movie.id}`;
     return this.http.put(url, movie, httpOptions)
   }

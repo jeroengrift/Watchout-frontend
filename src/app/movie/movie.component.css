@@ -1,8 +1,7 @@
 .movie {
-  margin: 2em 2em 2em 2em;
   list-style-type: none;
-  padding: 10px;
   width: 15em;
+  padding-left: 0px;
 }
 .movie li {
   position: relative;
@@ -47,11 +46,11 @@
 button {
   background-color: #eee;
   border: none;
-  padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
   cursor: hand;
   font-family: Arial;
+  margin-top: 7px;
 }
 
 button:hover {

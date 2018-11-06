@@ -42,7 +42,7 @@ export class MovieDetailComponent implements OnInit {
    this.movie.description = this.description;
    this.movie.rating = this.rating;
    this.movie.youtubeId = this.youtubeId;
-    this.movieService.updateMovie(this.movie)
+    this.movieService.EditMovie(this.movie)
       .subscribe(() => this.goBack());
   }
 
