@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Movie }         from '../movie';
-import { MovieService }  from '../movie.service';
+import { Movie }         from '../../domain/movie';
+import { MovieService }  from '../../services/movie.service';
 
 @Component({
   selector: 'app-watch',

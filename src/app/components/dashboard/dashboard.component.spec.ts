@@ -3,8 +3,8 @@ import { DashboardComponent } from './dashboard.component';
 import { MovieSearchComponent } from '../movie-search/movie-search.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { MovieService } from '../movie.service';
-import { Movie } from '../movie';
+import { MovieService } from '../../services/movie.service';
+import { Movie } from '../../domain/movie';
 
 
 describe('DashboardComponent', () => {

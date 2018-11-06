@@ -4,13 +4,13 @@ import { FormsModule }    from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { AppRoutingModule }     from './app-routing.module';
 import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { MovieDetailComponent }  from './movie-detail/movie-detail.component';
-import { MoviesComponent }      from './movie/movie.component';
-import { MovieSearchComponent }  from './movie-search/movie-search.component';
-import { MessagesComponent }    from './messages/messages.component';
-import { SafePipe } from './safe.pipe';
-import { WatchComponent } from './watch/watch.component';
+import { DashboardComponent }   from './components/dashboard/dashboard.component';
+import { MovieDetailComponent }  from './components/movie-detail/movie-detail.component';
+import { MoviesComponent }      from './components/movie/movie.component';
+import { MovieSearchComponent }  from './components/movie-search/movie-search.component';
+import { MessagesComponent }    from './components/messages/messages.component';
+import { SafePipe } from './pipes/safe.pipe';
+import { WatchComponent } from './components/watch/watch.component';
 
 @NgModule({
   imports: [

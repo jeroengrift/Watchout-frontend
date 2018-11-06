@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../movie';
-import { MovieService } from '../movie.service';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Movie } from '../../domain/movie';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-dashboard',

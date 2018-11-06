@@ -1,9 +1,9 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { MoviesComponent }      from './movie/movie.component';
-import { MovieDetailComponent }  from './movie-detail/movie-detail.component';
-import { WatchComponent }  from './watch/watch.component';
+import { DashboardComponent }   from './components/dashboard/dashboard.component';
+import { MoviesComponent }      from './components/movie/movie.component';
+import { MovieDetailComponent }  from './components/movie-detail/movie-detail.component';
+import { WatchComponent }  from './components/watch/watch.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

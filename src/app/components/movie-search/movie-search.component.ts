@@ -4,8 +4,8 @@ import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
 
-import { Movie } from '../movie';
-import { MovieService } from '../movie.service';
+import { Movie } from '../../domain/movie';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-movie-search',
