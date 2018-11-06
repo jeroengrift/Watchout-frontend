@@ -1,8 +1,8 @@
 .movie {
-  list-style-type: none;
-  width: 15em;
-  padding-left: 0px;
+      padding: 0;
+      list-style-type: none;
 }
+
 .movie li {
   position: relative;
   cursor: pointer;
@@ -63,4 +63,12 @@ button.delete {
   top: -32px;
   background-color: gray !important;
   color: white;
+}
+
+.row {
+  margin-top: 20px;
+}
+
+label{
+  color: #cfd8dc;
 }
