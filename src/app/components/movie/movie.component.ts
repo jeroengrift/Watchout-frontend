@@ -9,9 +9,7 @@ import { MovieService } from '../../services/movie.service';
 })
 
 export class MoviesComponent implements OnInit {
-
   movies: Movie[];
-  private movie = new Movie;
   private description: string;
   private name: string;
   private rating: number;
@@ -29,12 +27,8 @@ export class MoviesComponent implements OnInit {
   }
 
   addMovie() {
-    this.movie.name = this.name;
-    this.movie.description = this.description;
-    this.movie.rating = this.rating;
-    this.movie.youtubeId = this.youtubeId;
-    this.movie.id
-    this.movieService.addMovie(this.movie)
+    console.log(this.name)
+    this.movieService.addMovie(this.name, this.youtubeId, this.rating, this.description)
       .subscribe(movie => {
         this.movies.push(movie);
       });

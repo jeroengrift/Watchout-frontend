@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
 import { Movie } from '../domain/movie';
 import { MessageService } from '../services/message.service';
 
@@ -29,16 +28,22 @@ export class MovieService {
     return this.http.get<Movie>(url)
   }
 
-  searchMovies(term: string) {
-    if (!term.trim()) {
-      // if not search term, return empty movie array.
-      return of([]);
-    }
-    return this.http.get<Movie[]>(`${this.moviesUrl}/?name=${term}`)
-  }
+  // searchMovies(term: string) {
+  //   if (!term.trim()) {
+  //     // if not search term, return empty movie array.
+  //     return of([]);
+  //   }
+  //   return this.http.get<Movie[]>(`${this.moviesUrl}/?name=${term}`)
+  // }
 
-  addMovie (movie: Movie): Observable<Movie> {
+  addMovie (name: string, youtubeId: string, rating: number, description: string) {
     const url = `${this.moviesUrl}/`;
+    var movie: Movie = new Movie;
+    movie.name = name;
+    movie.youtubeId = youtubeId;
+    movie.rating = rating;
+    movie.description = description;
+    console.log(movie) //werkt goed
     return this.http.post<Movie>(url, movie, httpOptions)
   }
 
@@ -46,7 +51,7 @@ export class MovieService {
     this.http.delete(this.moviesUrl + '/' + id).subscribe((data) => {});
   }
 
-  EditMovie (movie: Movie): Observable<any> {
+  EditMovie (movie: Movie) {
     const url = `${this.moviesUrl}/${movie.id}`;
     return this.http.put(url, movie, httpOptions)
   }
