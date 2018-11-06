@@ -20,14 +20,14 @@ export class MoviesComponent implements OnInit {
   ngOnInit() {
     this.getMovies();
   }
-
+  
     getMovies(): void {
-    this.movieService.getMovies() 
-    .subscribe(movies => this.movies = movies); 
+    this.movieService.getMovies()
+    .subscribe(movies => this.movies = movies);
+  
   }
 
   addMovie() {
-    console.log(this.name)
     this.movieService.addMovie(this.name, this.youtubeId, this.rating, this.description)
       .subscribe(movie => {
         this.movies.push(movie);

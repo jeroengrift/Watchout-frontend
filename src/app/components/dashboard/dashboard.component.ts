@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   getMovies() {
     this.movieService.getMovies()
-      .subscribe(movies => this.movies = movies);
+    .subscribe(movies => this.movies = movies);
   }
 
   getYoutubeImg(url: string){  
@@ -26,7 +26,3 @@ export class DashboardComponent implements OnInit {
     // return  youtubeImgdUrl + id + '/maxresdefault.jpg';    
     return  youtubeImgdUrl + url + '/0.jpg';   }
 }  
-
-
-
-

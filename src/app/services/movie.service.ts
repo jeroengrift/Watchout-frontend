@@ -2,20 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Movie } from '../domain/movie';
 import { MessageService } from '../services/message.service';
+import { Store } from '@ngrx/store';
+import { MoviesActionTypes } from '../store/movies/movies.actions';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 //make the service injectable. It is injected when you create components 
-@Injectable({ providedIn: 'root' })
+@Injectable({ 
+  providedIn: 'root' })
+
 export class MovieService {
 
   // URL to web api
-  private moviesUrl = 'http://localhost:8080/api/film'; 
+  private moviesUrl = 'http://localhost:8080/api/film/'; 
 
   constructor(
     private http: HttpClient,
+    //private store: Store<any>,
     private messageService: MessageService) { }
 
   getMovies () {
@@ -23,21 +28,31 @@ export class MovieService {
     return this.http.get<Movie[]>(url)
   }
 
+  // getMoviesR() {
+  //   this.http.get<Movie[]>(this.moviesUrl)
+  //   .subscribe(movies => {
+  //     this.store.dispatch({
+  //       type: MoviesActionTypes.GETALL,
+  //       payload: movies
+  //     })
+  //   });
+  // }
+
   getMovie(id: number) {
-    const url = `${this.moviesUrl}/${id}`;
+    const url = `${this.moviesUrl}${id}`;
     return this.http.get<Movie>(url)
   }
 
-  // searchMovies(term: string) {
-  //   if (!term.trim()) {
-  //     // if not search term, return empty movie array.
-  //     return of([]);
-  //   }
-  //   return this.http.get<Movie[]>(`${this.moviesUrl}/?name=${term}`)
-  // }
+  searchMovies(term: string) {
+    if (!term.trim()) {
+      // if not search term, return empty movie array.
+      return [];
+    }
+    return this.http.get<Movie[]>(`${this.moviesUrl}?name=${term}`)
+  }
 
   addMovie (name: string, youtubeId: string, rating: number, description: string) {
-    const url = `${this.moviesUrl}/`;
+    const url = `${this.moviesUrl}`;
     var movie: Movie = new Movie;
     movie.name = name;
     movie.youtubeId = youtubeId;
@@ -48,11 +63,11 @@ export class MovieService {
   }
 
   deleteMovie (id: number) {
-    this.http.delete(this.moviesUrl + '/' + id).subscribe((data) => {});
+    this.http.delete(this.moviesUrl + id).subscribe((data) => {});
   }
 
   EditMovie (movie: Movie) {
-    const url = `${this.moviesUrl}/${movie.id}`;
+    const url = `${this.moviesUrl}${movie.id}`;
     return this.http.put(url, movie, httpOptions)
   }
 
