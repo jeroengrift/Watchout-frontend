@@ -6,8 +6,7 @@
 </head>
 
 <div class="row">
-
-  <div class="col-md-4">
+  <div class="col-md-6">
     <h2 id=listoplosser>Edit Movie</h2>
     <ul class="movie">
       <li *ngFor="let movie of movies">
@@ -19,30 +18,29 @@
     </ul>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-6">
     <h2>Add Movie</h2>
-    <form>
-      <div class="form-group">
+      <form [formGroup]="MoviesChanges">
+        <br />
         <label for="description">description</label>
-        <input type="text" class="form-control" [(ngModel)]="description" [ngModelOptions]="{standalone: true}">
-      </div>
-
-      <div class="form-group">
+        <br />
+        <input class="form-control" name="name" formControlName="name" />
+        <br />
         <label for="name">Name</label>
-        <input type="text" class="form-control" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
-      </div>
-
-      <div class="form-group">
+        <br />
+        <input class="form-control" name="description" formControlName="description" />
+        <br />
         <label for="rating">Rating</label>
-        <input type="text" class="form-control" [(ngModel)]="rating" [ngModelOptions]="{standalone: true}">
-      </div>
-
-      <div class="form-group">
+        <br />
+        <input class="form-control" name="rating" formControlName="rating" />
+        <br />
         <label for="youtubeId">Url</label>
-        <input type="text" class="form-control" [(ngModel)]="youtubeId" [ngModelOptions]="{standalone: true}">
-      </div>
-
-      <button (click)="addMovie()">Save</button>
-    </form>
+        <br />
+        <input class="form-control" name="youtubeId" formControlName="youtubeId" />
+        <br />
+        <button (click)="addMovie()">Save</button>
+      </form>
   </div>
 </div>
+
+</html>

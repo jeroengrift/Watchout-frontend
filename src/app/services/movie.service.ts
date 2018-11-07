@@ -52,13 +52,8 @@ export class MovieService {
     return this.http.get<Movie[]>(`${this.moviesUrl}?name=${term}`)
   }
 
-  addMovie (name: string, youtubeId: string, rating: number, description: string) :Observable<Movie> {
+  addMovie (movie: Movie) :Observable<Movie> {
     const url = `${this.moviesUrl}`;
-    var movie: Movie = new Movie;
-    movie.name = name;
-    movie.youtubeId = youtubeId;
-    movie.rating = rating;
-    movie.description = description;
     return this.http.post<Movie>(url, movie, httpOptions)
   }
 
