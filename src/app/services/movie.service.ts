@@ -4,6 +4,7 @@ import { Movie } from '../domain/movie';
 import { MessageService } from '../services/message.service';
 import { Store } from '@ngrx/store';
 import { MoviesActionTypes } from '../store/movies/movies.actions';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,7 +24,7 @@ export class MovieService {
     //private store: Store<any>,
     private messageService: MessageService) { }
 
-  getMovies () {
+  getMovies (): Observable<Movie[]> {
     const url = `${this.moviesUrl}/`;
     return this.http.get<Movie[]>(url)
   }
@@ -38,7 +39,7 @@ export class MovieService {
   //   });
   // }
 
-  getMovie(id: number) {
+  getMovie(id: number): Observable<Movie> {
     const url = `${this.moviesUrl}${id}`;
     return this.http.get<Movie>(url)
   }
@@ -51,24 +52,24 @@ export class MovieService {
     return this.http.get<Movie[]>(`${this.moviesUrl}?name=${term}`)
   }
 
-  addMovie (name: string, youtubeId: string, rating: number, description: string) {
+  addMovie (name: string, youtubeId: string, rating: number, description: string) :Observable<Movie> {
     const url = `${this.moviesUrl}`;
     var movie: Movie = new Movie;
     movie.name = name;
     movie.youtubeId = youtubeId;
     movie.rating = rating;
     movie.description = description;
-    console.log(movie) //werkt goed
     return this.http.post<Movie>(url, movie, httpOptions)
   }
 
-  deleteMovie (id: number) {
+  deleteMovie (id: number): void {
     this.http.delete(this.moviesUrl + id).subscribe((data) => {});
   }
 
-  EditMovie (movie: Movie) {
+  EditMovie (movie: Movie): Observable<Movie> {
     const url = `${this.moviesUrl}${movie.id}`;
-    return this.http.put(url, movie, httpOptions)
+    const myJSON = JSON.stringify(movie);
+    return this.http.put<Movie>(url, myJSON, httpOptions);
   }
 
   /** Log a MovieService message with the MessageService */

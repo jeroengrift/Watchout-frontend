@@ -27,7 +27,7 @@ export class MoviesComponent implements OnInit {
   
   }
 
-  addMovie() {
+  addMovie(){
     this.movieService.addMovie(this.name, this.youtubeId, this.rating, this.description)
       .subscribe(movie => {
         this.movies.push(movie);

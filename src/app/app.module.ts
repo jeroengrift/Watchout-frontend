@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -28,7 +29,8 @@ import { moviesReducer } from './store/movies/movies.reducer';
     HttpClientModule,
     //StoreModule.forRoot<IAppState>(rootReducer),
     StoreModule.forRoot({movies: moviesReducer}),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    ReactiveFormsModule
   ],
 
   declarations: [

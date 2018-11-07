@@ -1,37 +1,42 @@
 <!doctype html>
 <html lang="en">
-    <head>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    </head>
 
-  <div class="row">
-    <div class="col-md-3">
-        <h2>Edit {{movie?.name}}</h2>
-        <form>
-            <div class="form-group">
-                <label for="description">description</label>
-                <input type="text" class="form-control" [(ngModel)] ="description" [ngModelOptions]="{standalone: true}">
-              </div>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
 
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" [(ngModel)] ="name" [ngModelOptions]="{standalone: true}">
-          </div>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Edit {{movie?.name}}</h2>
 
-          <div class="form-group">
-            <label for="rating">Rating</label>
-            <input type="text" class="form-control" [(ngModel)] ="rating" [ngModelOptions]="{standalone: true}">
-          </div>
+    <form [formGroup]="MoviesChanges">
+        <label for="name">Name</label>
+        <br />
+        <input class="form-control" name="name" formControlName="name" />
+      <!-- <div class="alert" *ngIf="MoviesChanges?.errors?.name">
+        {{MoviesChanges.errors.name}}
+      </div> -->
 
-          <div class="form-group">
-            <label for="youtubeId">youtubeId</label>
-            <input type="text" class="form-control" [(ngModel)] ="youtubeId" [ngModelOptions]="{standalone: true}">
-          </div>
+      <br />
+      <label for="description">Description</label>
+      <br />
+      <input class="form-control" name="description" formControlName="description" />
+      <br />
 
-          <button (click)="goBack()">Go back</button>
-          <button (click)="editMovie()">Save edits</button>     
-        </form>
-      </div>
-    </div>
+      <label for="rating">Rating</label>
+      <br />
+      <input class="form-control" name="rating" formControlName="rating" />
+      <br />
+
+      <label for="youtubeId">YoutubeId</label>
+      <br />
+      <input class="form-control" name="youtubeId" formControlName="youtubeId" />
+      <br />
+
+      <button (click)="save()">Save</button>
+      <button (click)="goBack()">Go back</button>
+    </form>
+  </div>
+</div>
+
 </html>
-

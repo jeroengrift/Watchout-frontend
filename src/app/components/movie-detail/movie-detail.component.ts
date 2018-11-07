@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Movie }         from '../../domain/movie';
 import { MovieService }  from '../../services/movie.service';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-movie-detail',
@@ -11,39 +12,53 @@ import { MovieService }  from '../../services/movie.service';
 })
 export class MovieDetailComponent implements OnInit {
   @Input() movie: Movie;
-
-  private description: string;
-  private name: string;
-  private rating: number;
-  private youtubeId: string;
+  
+  public MoviesChanges: FormGroup = new FormGroup(
+  {
+    name: new FormControl(''),
+    description : new FormControl(''),
+    rating: new FormControl(''),
+    youtubeId: new FormControl('')
+  });
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private location: Location
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
     this.getMovie();
   }
 
+  private getModel() {
+    return <Movie>{
+      id: this.movie.id,
+      description: this.MoviesChanges.value.description,
+      name: this.MoviesChanges.value.name,
+      rating: this.MoviesChanges.value.rating,
+      youtubeId: this.MoviesChanges.value.youtubeId
+    };
+  }
+
   getMovie(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.movieService.getMovie(id)
-      .subscribe(movie => this.movie = movie);
+      .subscribe(movie => {
+        this.movie = movie;
+        this.MoviesChanges.controls['name'].setValue(this.movie.name);
+        this.MoviesChanges.controls['description'].setValue(this.movie.description);
+        this.MoviesChanges.controls['rating'].setValue(this.movie.rating);
+        this.MoviesChanges.controls['youtubeId'].setValue(this.movie.youtubeId);
+      });
   }
 
   goBack(): void {
     this.location.back();
   }
 
- editMovie(): void {
-   this.movie.name = this.name;
-   this.movie.description = this.description;
-   this.movie.rating = this.rating;
-   this.movie.youtubeId = this.youtubeId;
-    this.movieService.EditMovie(this.movie)
-      .subscribe(() => this.goBack());
+  save() {
+    this.movieService.EditMovie(this.getModel()).subscribe();
   }
 
   getUrl() {
