@@ -1,21 +1,22 @@
 <!doctype html>
 <html lang="en">
-    <head>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    </head>
 
-    <div class="row">
-      <div class="col-md-2">
-        <h2>Top Movies</h2>
-      </div>
-    </div>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<div class="row">
+  <div class="col-md-2">
+    <h2>Top Movies</h2>
+  </div>
+</div>
 
 <div class="grid grid-pad">
-  <a *ngFor="let movie of movies" class="col-1-4"
-      routerLink="/watch/{{movie.id}}">
-    <div class="module movie" [ngStyle]="{'background-image': 'url(' + getYoutubeImg(movie.youtubeId) + ')'}" >
-        <h4 class="titelnaam"> {{movie.name}}</h4>
+  <a *ngFor="let movie of movies" class="col-1-4" routerLink="/watch/{{movie.id}}">
+    <h4 class="titelnaam"> {{movie.name}}</h4>
+    <br />
+    <div class="module movie" [ngStyle]="{'background-image': 'url(' + getYoutubeImg(movie.youtubeId) + ')'}">
+      <br />
     </div>
   </a>
 </div>
-

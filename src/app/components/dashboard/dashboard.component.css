@@ -1,7 +1,7 @@
 /* DashboardComponent's private CSS styles */
 [class*='col-'] {
   float: left;
-  padding-right: 10px;
+  padding-right: 15px;
   padding-bottom: 10px;
 }
 [class*='col-']:last-of-type {
@@ -33,10 +33,10 @@ h4 {
 .module {
   text-align: left;
   color: #eee;
-  min-height: 325px;
+  min-height: 250px;
   min-width: 100%;
   background-color: #000000;
-  border-radius: 0px;
+  border-radius: 20px;
   background-size: 100% 100%;
 
 }
@@ -44,7 +44,10 @@ h4 {
   background-color: #bbb;
   cursor: pointer;
   color: #B9090B;
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transition-duration: 450ms;
 }
+
 .grid-pad {
   padding: 10px 0;
 }

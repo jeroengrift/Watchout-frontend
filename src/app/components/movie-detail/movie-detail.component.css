@@ -3,11 +3,12 @@ label {
   display: inline-block;
   width: 3em;
   margin: .5em 0;
-  color: #B9090B;
-  font-weight: bold;
+  color: #cfd8dc;
+  font-weight: lighter;
+  font-size: 1.5em;
 }
 input {
-  font-size: 1em;
+  font-size: 1.5em;
   padding-left: .4em;
 }
 button {
@@ -28,16 +29,8 @@ button:disabled {
   cursor: auto;
 }
 
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
-}
-
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442; /* red */
-}
-
-label{
-  color: #cfd8dc;
 }
 
 .movie {
@@ -86,13 +79,14 @@ label{
 }
 
 button {
-  background-color: #eee;
+  background-color: #a94442;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   cursor: hand;
   font-family: Arial;
   margin-top: 7px;
+  margin-right: 10px;
 }
 
 button:hover {
@@ -114,4 +108,8 @@ button.delete {
 
 label{
   color: #cfd8dc;
+}
+
+#listoplosser {
+  padding-left: 0px !important;
 }

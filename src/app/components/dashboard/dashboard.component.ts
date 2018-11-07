@@ -24,5 +24,5 @@ export class DashboardComponent implements OnInit {
   getYoutubeImg(url: string){  
     const youtubeImgdUrl = 'https://img.youtube.com/vi/';     
     // return  youtubeImgdUrl + id + '/maxresdefault.jpg';    
-    return  youtubeImgdUrl + url + '/0.jpg';   }
+    return  youtubeImgdUrl + url + '/maxresdefault.jpg';   }
 }  
