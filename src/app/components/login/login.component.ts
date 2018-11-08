@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
 
     if(authorized) {
       this.accountname = ingetypteUser;
-      console.log(this.accountname);
       localStorage.setItem('loggedIn', String(Math.random() * 10000));
       
       // alleen maar om even met headers te spelen.
