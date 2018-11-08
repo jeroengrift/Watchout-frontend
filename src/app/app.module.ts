@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,6 +19,10 @@ import { SafePipe } from './pipes/safe.pipe';
 import { IAppState } from './store/app-state.interface';
 import { rootReducer } from './store/app.reducer';
 import { moviesReducer } from './store/movies/movies.reducer';
+import { LoginComponent } from './components/login/login.component';
+import { LoginService } from './services/login.service';
+import { MovieService } from './services/movie.service';
+import { AddHeaderInterceptor } from './interceptors/addheader.interceptor';
 
 
 @NgModule({
@@ -28,7 +32,7 @@ import { moviesReducer } from './store/movies/movies.reducer';
     AppRoutingModule,
     HttpClientModule,
     //StoreModule.forRoot<IAppState>(rootReducer),
-    StoreModule.forRoot({movies: moviesReducer}),
+    StoreModule.forRoot({ movies: moviesReducer }),
     StoreDevtoolsModule.instrument(),
     ReactiveFormsModule
   ],
@@ -42,7 +46,19 @@ import { moviesReducer } from './store/movies/movies.reducer';
     MovieSearchComponent,
     SafePipe,
     WatchComponent,
+    LoginComponent,
   ],
-  bootstrap: [ AppComponent ]
+
+  providers: [
+    LoginService,
+    MovieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AddHeaderInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -50,10 +50,16 @@ export class MoviesComponent implements OnInit {
 
   private getModel() {
     return <Movie>{
-      description: this.MoviesChanges.value.description,
       name: this.MoviesChanges.value.name,
+      description: this.MoviesChanges.value.description,
       rating: this.MoviesChanges.value.rating,
       youtubeId: this.MoviesChanges.value.youtubeId
     };
   }
+
+  getYoutubeImg(url: string){  
+    const youtubeImgdUrl = 'https://img.youtube.com/vi/';     
+    // return  youtubeImgdUrl + id + '/maxresdefault.jpg';    
+    return  youtubeImgdUrl + url + '/maxresdefault.jpg';   }
+
 }

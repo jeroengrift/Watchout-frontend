@@ -14,7 +14,7 @@ h2 {
 nav a {
   font-size: 2em;
   text-decoration: none;
-  margin-top: 50px;
+  margin-top: 65px;
   display: inline-block;
   background-color: #000;
   border-radius: 10px;
@@ -34,7 +34,7 @@ header {
   background-color: #000000 !important;
   overflow: auto;
   padding-left: 0px;
-  padding-right: 50px;
+  padding-right: 10px;
   padding-top: 20px;
   padding-bottom: 50px;
   margin-bottom: 1px;
@@ -60,7 +60,23 @@ header {
   height: 100% !important;
  }
 
- #search {
-   padding-left: 0px !important;
-   padding-top: 50px !important;
+ .col-md-4 {
+   margin-top: 40px !important;
  }
+
+ label {
+  display: inline-block;
+  width: 3em;
+  margin: .5em 0;
+  color: #cfd8dc;
+  font-weight: lighter;
+  font-size: 1.5em;
+}
+input {
+  font-size: 1.5em;
+  padding-left: 0px !important;
+}
+
+.row1 {
+  margin-left: 0px !important;
+}

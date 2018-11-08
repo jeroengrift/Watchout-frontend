@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<form id="login" *ngIf="!isLoggedIn()" [formGroup]="loginForm">
+  <div class="row">
+    <div class="col-sm-5">
+      <label for="username">User</label>
+      <input name="username" type="text" formControlName="username" />
+    </div>
+    <div class="col-sm-5">
+      <label for="password">Password</label>
+      <input name="password" type="password" formControlName="password" />
+    </div>
+    <div class="col-sm-2">
+      <button id="loginbutton" (click)="login()">Login</button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <form id="logout" *ngIf="isLoggedIn()">
+    <div class="col-sm-8">
+      <label id="loggedinas" for="loggedinas">Logged in as {{accountname}} </label>
+      </div>
+    <div class="col-sm-4">
+      <button id="logoutbutton" (click)="logout()">Log out</button>
+    </div>
+  </form>
+</div>
+
+</html>

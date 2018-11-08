@@ -10,11 +10,11 @@
     <h2>Add Movie</h2>
     <form [formGroup]="MoviesChanges">
       <br />
-      <label for="description">description</label>
+      <label for="name">Name</label>
       <br />
       <input class="form-control" name="name" formControlName="name" />
       <br />
-      <label for="name">Name</label>
+      <label for="description">Description</label>
       <br />
       <input class="form-control" name="description" formControlName="description" />
       <br />
@@ -31,7 +31,7 @@
   </div>
 
 
-  <div class="col-md-4">
+  <div class="col-md-8">
     <h2 id=listoplosser>Edit Movie</h2>
     <br />
     <ul class="movie">
@@ -43,6 +43,18 @@
       </li>
     </ul>
   </div>
+</div>
+
+
+<div class="grid grid-pad">
+  <h2 id=listoplosser>Edit Movie</h2>
+  <a *ngFor="let movie of movies" class="col-1-4" routerLink="/detail/{{movie.id}}">
+    <h4 class="titelnaam"> {{movie.name}}</h4>
+    <br />
+    <div class="module movie" [ngStyle]="{'background-image': 'url(' + getYoutubeImg(movie.youtubeId) + ')'}">
+      <br />
+    </div>
+  </a>
 </div>
 
 </html>
