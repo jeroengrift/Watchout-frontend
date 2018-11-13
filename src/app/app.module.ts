@@ -23,7 +23,9 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginService } from './services/login.service';
 import { MovieService } from './services/movie.service';
 import { AddHeaderInterceptor } from './interceptors/addheader.interceptor';
-
+import { MapComponent } from './components/map/map.component';
+import { EffectsModule } from '@ngrx/effects'
+import { MovieEffects } from './store/movies/movies.effects';
 
 @NgModule({
   imports: [
@@ -31,10 +33,11 @@ import { AddHeaderInterceptor } from './interceptors/addheader.interceptor';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    //StoreModule.forRoot<IAppState>(rootReducer),
-    StoreModule.forRoot({ movies: moviesReducer }),
+    StoreModule.forRoot<IAppState>(rootReducer),
+    // StoreModule.forRoot({ movies: moviesReducer }),
     StoreDevtoolsModule.instrument(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EffectsModule.forRoot([ MovieEffects])
   ],
 
   declarations: [
@@ -47,6 +50,7 @@ import { AddHeaderInterceptor } from './interceptors/addheader.interceptor';
     SafePipe,
     WatchComponent,
     LoginComponent,
+    MapComponent,
   ],
 
   providers: [

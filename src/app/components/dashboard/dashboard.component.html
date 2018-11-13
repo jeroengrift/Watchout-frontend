@@ -12,7 +12,7 @@
 </div>
 
 <div class="grid grid-pad">
-  <a *ngFor="let movie of movies" class="col-1-4" routerLink="/watch/{{movie.id}}">
+  <a *ngFor="let movie of movies | async" class="col-1-4" routerLink="/watch/{{movie.id}}">
     <h4 class="titelnaam"> {{movie.name}}</h4>
     <br />
     <div class="module movie" [ngStyle]="{'background-image': 'url(' + getYoutubeImg(movie.youtubeId) + ')'}">

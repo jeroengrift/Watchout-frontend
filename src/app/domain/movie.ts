@@ -1,7 +1,12 @@
 export class Movie {
-    id: number;
-    youtubeId: string;
-    name: string;
-    rating: number;
-    description: string;
+    constructor(
+    public id: number,
+    public youtubeId: string,
+    public name: string,
+    public rating: number,
+    public description: string,
+    public lon: number,
+    public lat: number,
+    ) 
+    {}
 }

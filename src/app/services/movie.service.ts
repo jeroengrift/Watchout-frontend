@@ -21,10 +21,9 @@ export class MovieService {
 
   constructor(
     private http: HttpClient,
-    //private store: Store<any>,
     private messageService: MessageService) { }
 
-  getMovies (): Observable<Movie[]> {
+  getMovies(): Observable<Movie[]> {
     const url = `${this.moviesUrl}/`;
     return this.http.get<Movie[]>(url)
   }

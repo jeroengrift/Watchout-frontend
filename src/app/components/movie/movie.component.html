@@ -35,7 +35,7 @@
     <h2 id=listoplosser>Edit Movie</h2>
     <br />
     <ul class="movie">
-      <li *ngFor="let movie of movies">
+      <li *ngFor="let movie of movies | async">
         <a routerLink="/detail/{{movie.id}}">
           {{movie.name}}
         </a>
@@ -43,18 +43,6 @@
       </li>
     </ul>
   </div>
-</div>
-
-
-<div class="grid grid-pad">
-  <h2 id=listoplosser>Edit Movie</h2>
-  <a *ngFor="let movie of movies" class="col-1-4" routerLink="/detail/{{movie.id}}">
-    <h4 class="titelnaam"> {{movie.name}}</h4>
-    <br />
-    <div class="module movie" [ngStyle]="{'background-image': 'url(' + getYoutubeImg(movie.youtubeId) + ')'}">
-      <br />
-    </div>
-  </a>
 </div>
 
 </html>

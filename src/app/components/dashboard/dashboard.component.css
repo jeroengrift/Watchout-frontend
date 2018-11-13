@@ -31,7 +31,6 @@ h4 {
   transition-duration: 450ms;
 }
 
-
 .grid {
   margin: 0;
 }
@@ -41,7 +40,7 @@ h4 {
 .module {
   text-align: left;
   color: #eee;
-  min-height: 250px;
+  min-height: 300px;
   min-width: 100%;
   background-color: #000000;
   border-radius: 10px;
