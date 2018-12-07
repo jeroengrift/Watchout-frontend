@@ -7,7 +7,7 @@ import { fromLonLat } from 'ol/proj';
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
 import { Vector, VectorTile } from 'ol/layer';
-import { Vector as VectorSource,  VectorTile as VectorTileSource} from 'ol/source';
+import { Vector as VectorSource, VectorTile as VectorTileSource } from 'ol/source';
 import { Style, Circle, Fill, Stroke } from 'ol/style';
 import { Projection } from 'ol/proj';
 import { MVT } from 'ol/format';
@@ -17,6 +17,7 @@ import { Movie } from 'src/app/domain/movie';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/store/app-state.interface';
 import * as movieActions from '../../store/movies/movies.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -30,7 +31,7 @@ export class MapComponent implements OnInit {
   current_projection = new Projection({ code: "EPSG:4326" });
   new_projection = new Projection({ code: "EPSG:3857" });
 
-  constructor(private store: Store<IAppState>) { }
+  constructor(private router: Router, private store: Store<IAppState>) { }
 
   map: OlMap;
   source: OlXYZ;
@@ -46,11 +47,11 @@ export class MapComponent implements OnInit {
   vector_mvt: MVT;
 
   ngOnInit() {
-    this.getMovies(); 
+    this.getMovies();
   }
 
-  prepareView() : void {
-    
+  prepareView(): void {
+
     this.source = new OlXYZ({
       url: 'http://tile.stamen.com/toner/{z}/{x}/{y}.png'
     });
@@ -67,13 +68,16 @@ export class MapComponent implements OnInit {
     // });
 
     this.layer = new OlTileLayer({
-      source: this.source
+      source: this.source,
+      projection: "EPSG:3857"
     });
 
     this.view = new OlView({
-      center: fromLonLat([6.661594, 50.433237]),
-      zoom: 3,
-      minZoom: 3
+      center: fromLonLat([0, 30]),
+      zoom: 2.7,
+      minZoom: 2.7,
+      maxZoom: 2.7
+
     });
 
     this.vector_source = new VectorSource({
@@ -81,7 +85,8 @@ export class MapComponent implements OnInit {
     });
 
     this.vector_layer = new Vector({
-      source: this.vector_source
+      source: this.vector_source,
+      projection: "EPSG:3857",
     });
 
     this.fill = new Fill({
@@ -110,6 +115,19 @@ export class MapComponent implements OnInit {
       layers: [this.layer, this.vector_layer],
       view: this.view
     });
+
+    this.map.on('click', evt => {
+      {
+        var f = this.map.forEachFeatureAtPixel(
+          evt.pixel,
+          function (ft, layer) { return ft; }
+        );
+        var id = f.get('id');
+        console.log(id);
+        var base_url = "watch/"
+        this.router.navigate([`${base_url}${id}`]);
+      }
+    });
   }
 
   getMovies() {
@@ -122,17 +140,14 @@ export class MapComponent implements OnInit {
         let point = new Point([movie.lon, movie.lat]);
         point.transform(this.current_projection, this.new_projection);
         let feature = new Feature({
+          type: 'click',
           geometry: point
         });
+        feature.set('id', movie.id)
         this.features.push(feature)
       }
-      console.log(this.features[1])
       this.prepareView();
     });
   }
 }
-
-
-
-
 
