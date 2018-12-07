@@ -56,7 +56,7 @@ export class MoviesComponent implements OnInit {
       description: this.MoviesChanges.value.description,
       rating: this.MoviesChanges.value.rating,
       youtubeId: this.MoviesChanges.value.youtubeId
-    };
+    };  
   }
 
   getYoutubeImg(url: string){  

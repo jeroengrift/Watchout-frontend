@@ -60,10 +60,5 @@ export class MovieDetailComponent implements OnInit {
   save() {
     this.movieService.EditMovie(this.getModel()).subscribe();
   }
-
-  getUrl() {
-    const url = 'https://www.youtube.com/embed/' + this.movie.youtubeId;
-    return url;
-  }
 }
 

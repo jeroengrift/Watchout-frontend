@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from 'src/app/services/movie.service';
-import { Movie } from '../../domain/movie';
-import { Point } from 'ol/geom/Point';
-import Map from 'ol/Map';
-import XYZ  from 'ol/source/XYZ';
-import TileLayer  from 'ol/layer/Tile';
-import  View  from 'ol/View';
+import OlMap from 'ol/Map';
+import OlXYZ from 'ol/source/XYZ';
+import OlTileLayer from 'ol/layer/Tile';
+import OlView from 'ol/View';
 import { fromLonLat } from 'ol/proj';
-import { Vector } from 'ol/layer';
-import { Feature } from 'ol/Feature';
-import {GeoJSON} from 'ol/source';
+import { Feature } from 'ol';
+import { Point } from 'ol/geom';
+import { Vector, VectorTile } from 'ol/layer';
+import { Vector as VectorSource,  VectorTile as VectorTileSource} from 'ol/source';
+import { Style, Circle, Fill, Stroke } from 'ol/style';
+import { Projection } from 'ol/proj';
+import { MVT } from 'ol/format';
+
+import { Observable } from 'rxjs';
+import { Movie } from 'src/app/domain/movie';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from 'src/app/store/app-state.interface';
+import * as movieActions from '../../store/movies/movies.actions';
 
 @Component({
   selector: 'app-map',
@@ -18,41 +25,113 @@ import {GeoJSON} from 'ol/source';
 })
 
 export class MapComponent implements OnInit {
-  
-    public source: XYZ = new XYZ({
-    url: 'http://tile.osm.org/{z}/{x}/{y}.png'
-    });
+  movies: Observable<Movie[]>;
+  features: Feature[] = new Array();
+  current_projection = new Projection({ code: "EPSG:4326" });
+  new_projection = new Projection({ code: "EPSG:3857" });
 
-    public layer: TileLayer = new TileLayer({
-    source: this.source
-    });
+  constructor(private store: Store<IAppState>) { }
 
-    public view: View = new View({
-    center: fromLonLat([0, 0]),
-    zoom: 2.5,
-    minZoom: 2.5
-    });
+  map: OlMap;
+  source: OlXYZ;
+  layer: OlTileLayer;
+  view: OlView;
+  vector_source: VectorSource;
+  vector_layer: Vector;
+  fill: Fill;
+  stroke: Stroke;
+  style: Style;
+  vector_tile: VectorTile;
+  vector_tile_source: VectorTileSource;
+  vector_mvt: MVT;
 
-    public map: Map = new Map({
-    target: 'map',
-    layers: [this.layer],
-    view: this.view
-    });
+  ngOnInit() {
+    this.getMovies(); 
+  }
 
-    constructor(){}
-  
-    ngOnInit() {}
-
-    // var vectorLayer = new Vector({
-    //   source: new GeoJSON({
-    //     url: 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_rivers_lake_centerlines.geojson'
-    //   })
-    // });
+  prepareView() : void {
     
-    // // Add Vector layer to map
-    // this.map.addLayer(vectorLayer);
+    this.source = new OlXYZ({
+      url: 'http://tile.stamen.com/toner/{z}/{x}/{y}.png'
+    });
 
+    // this.vector_mvt = new MVT();
+
+    // this.vector_tile_source = new VectorTileSource({
+    //   format: this.vector_mvt,
+    //   url: 'https://osm.tegola.io/maps/osm/{z}/{x}/{y}.pbf'
+    // });
+
+    // this.vector_tile = new VectorTile({
+    //   source: this.vector_source
+    // });
+
+    this.layer = new OlTileLayer({
+      source: this.source
+    });
+
+    this.view = new OlView({
+      center: fromLonLat([6.661594, 50.433237]),
+      zoom: 3,
+      minZoom: 3
+    });
+
+    this.vector_source = new VectorSource({
+      features: this.features
+    });
+
+    this.vector_layer = new Vector({
+      source: this.vector_source
+    });
+
+    this.fill = new Fill({
+      color: [180, 0, 0, 0.3]
+    });
+
+    this.stroke = new Stroke({
+      color: [180, 0, 0, 1],
+      width: 1
+    });
+
+    this.style = new Style({
+      image: new Circle({
+        fill: this.fill,
+        stroke: this.stroke,
+        radius: 8
+      }),
+      fill: this.fill,
+      stroke: this.stroke
+    });
+
+    this.vector_layer.setStyle(this.style);
+
+    this.map = new OlMap({
+      target: 'map',
+      layers: [this.layer, this.vector_layer],
+      view: this.view
+    });
+  }
+
+  getMovies() {
+    this.store.dispatch(new movieActions.GetAll());
+    this.movies = this.store.pipe(select(s => s.movies));
+
+    this.movies.subscribe(data => {
+      for (let movie of data) {
+
+        let point = new Point([movie.lon, movie.lat]);
+        point.transform(this.current_projection, this.new_projection);
+        let feature = new Feature({
+          geometry: point
+        });
+        this.features.push(feature)
+      }
+      console.log(this.features[1])
+      this.prepareView();
+    });
+  }
 }
+
 
 
 

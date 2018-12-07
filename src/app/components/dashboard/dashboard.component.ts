@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../domain/movie';
-import { MovieService } from '../../services/movie.service';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/store/app-state.interface';
 import * as movieActions from '../../store/movies/movies.actions';
@@ -24,7 +23,6 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new movieActions.GetAll());
     this.movies = this.store.pipe(select(s => s.movies));
   }
-
 
   // getMovies() {
   //   this.movieService.getMovies()
